@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Loging</title>
+    </head>
+    <body>
+        {% extends "base.html" %}
+        {% block content %}
+        <h1>Login</h1>
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Username" name="username">
+            <br>
+            <br>
+            <input type="password" placeholder="Password" name="password">
+            <br>
+            <br>
+            <input type="submit" value="Login">
+            <br>
+        </form>
+        {% endblock %}
+    </body>
+</html>
