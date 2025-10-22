@@ -1,0 +1,14 @@
+<html>
+<form action="{% url 'update_task' task.id %}" method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Título" name="title" value="{{ task.title }}">
+            <br>
+            <br>
+            <input type="text" placeholder="Descrição" name="description" value="{{ task.description }}">
+            <br>
+            <br>
+            <input type="submit" value="Atualizar Tarefa">
+            <br>
+        </form>
+        <a href="{% url 'list' %}">Cancelar</a>
+</html>

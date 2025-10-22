@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>{{ task.title }}</h1>
+  <p>Descrição: {{ task.description }}</p>
+  <p>Concluída: {{ task.completed }}</p>
+  <p>Criada em: {{ task.created_at }}</p>
+  <br>
+  <form action="{% url 'update_task' task.id %}" method="GET">
+    <button type="submit">Editar Tarefa</button>
+  </form>
+  <form action="{% url 'delete_task' task.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?');">Excluir Tarefa</button>
+  </form>
+{% endblock %}

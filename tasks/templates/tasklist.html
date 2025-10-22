@@ -1,0 +1,23 @@
+<html>
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+    <p>Bem-vindo a sua lista de tarefas! Aqui você pode gerenciar suas tarefas.</p>
+    
+
+<ul>
+    <h1>Tarefas</h1>
+        <ul>
+            {% for task in tasks %}
+                <li><a href="{% url 'task_detail' task.id %}"><h2>{{ task.title }}</h2></a>
+                    <h3>{{ task.description }}</h3>
+                    <h3>{{ task.completed }}</h3></li>
+            {% empty %}
+                <li>Nenhuma tarefa disponível.</li>
+            {% endfor %}
+        </ul>
+</ul>
+<a href="{% url 'create_task' %}">Criar nova tarefa</a>
+{% endblock %}
+</body>
+</html>

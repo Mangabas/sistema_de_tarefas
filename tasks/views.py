@@ -1,8 +1,18 @@
+import django
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import (
+    ListView, 
+    DetailView, 
+    CreateView, 
+    UpdateView, 
+    DeleteView
+)
+from .models import Task
+
 
 def register(request):
     if request.method == 'GET':
@@ -22,10 +32,6 @@ def register(request):
 
         return HttpResponse(f"Usuario {username} criado com sucesso!")
 
-@login_required
-def index(request):
-    return render(request, 'index.html')
-
 def login(request):
     if request.method == 'GET':
         return render(request, 'registration/login.html')
@@ -37,10 +43,76 @@ def login(request):
         
         if user is not None:
             auth_login(request, user)
-            return redirect('index')
+            return redirect('list')
         else:
             return HttpResponse("Credenciais invalidas.")
 
 def logout(request):
     auth_logout(request)  
-    return redirect('index')
+    return redirect('list')
+
+class TaskList(LoginRequiredMixin, ListView):
+    model = Task
+    context_object_name = 'tasks'
+    template_name = 'tasklist.html'
+
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)
+
+class DetailTask(LoginRequiredMixin, DetailView):
+    model = Task
+    context_object_name = 'task'
+    template_name = 'detailtask.html'
+
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)
+
+class CreateTask(LoginRequiredMixin, CreateView):
+    
+    def get(self, request):
+        return render(request, 'createtask.html')
+
+    def post(self, request):
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+
+        task = Task.objects.create(
+            title=title,
+            description=description,
+            user=request.user
+        )
+        task.save()
+
+        return redirect('list')
+
+class UpdateTask(LoginRequiredMixin, UpdateView):
+    
+    def get(self, request, pk):
+        task = Task.objects.filter(user=request.user, pk=pk).first()
+        if task:
+            return render(request, 'updatetask.html', {'task': task})
+        return redirect('list')
+
+    def post(self, request, pk):
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+
+        task = Task.objects.filter(user=request.user, pk=pk).first()
+        if task:
+            task.title = title
+            task.description = description
+            task.save()
+
+        return redirect('list')
+    
+class DeleteTask(LoginRequiredMixin, DeleteView):
+
+    def post(self, request, pk):
+        task = Task.objects.filter(user=request.user, pk=pk).first()
+        if task:
+            task.delete()
+        return redirect('list')
+
+
+    
+

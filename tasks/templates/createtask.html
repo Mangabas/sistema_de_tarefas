@@ -1,0 +1,14 @@
+<html>
+<form action="{% url 'create_task' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Título" name="title">
+            <br>
+            <br>
+            <input type="text" placeholder="Descrição" name="description">
+            <br>
+            <br>
+            <input type="submit" value="Criar Tarefa">
+            <br>
+        </form>
+        <a href="{% url 'list' %}">Cancelar</a>
+</html>
