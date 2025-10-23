@@ -2,13 +2,13 @@
 {% block content %}
 <div class="form-container">
     <h1>Editar Tarefa</h1>
-    <form action="{% url 'update_task' task.id %}" method="POST" class="form">
+    <form action="{% url 'update_task' task.id %}" method="POST">
         {% csrf_token %}
-        <input class="form-field" type="text" placeholder="Título" name="title" value="{{ task.title }}" required>
-        <textarea class="form-field" placeholder="Descrição" name="description" rows="4">{{ task.description }}</textarea>
+        <input type="text" name="title" placeholder="Título" value="{{ task.title }}" class="form-field" required>
+        <textarea name="description" placeholder="Descrição" rows="4" class="form-field">{{ task.description }}</textarea>
         <div class="form-actions">
-            <button class="btn-primary" type="submit" >Atualizar Tarefa</button>
-            <a href="{% url 'task_detail' task.id %}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn-primary">Atualizar Tarefa</button>
+            <a href="{% url 'task_detail' task.id %}" class="btn-secondary">Cancelar</a>
         </div>
     </form>
 </div>

@@ -3,9 +3,7 @@
 <div class="detail-container">
     <div class="detail-header">
         <h1>{{ task.title }}</h1>
-        <span class="status-badge">
-            {% if task.completed %}✓ Concluída{% else %}Pendente{% endif %}
-        </span>
+        <span>{% if task.completed %}✓ Concluída{% else %}⏳ Pendente{% endif %}</span>
     </div>
     
     <div class="detail-content">
@@ -23,9 +21,9 @@
         <a href="{% url 'update_task' task.id %}" class="btn-primary">Editar</a>
         <form action="{% url 'delete_task' task.id %}" method="POST">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?');">Excluir</button>
+            <button type="submit" class="btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta tarefa?');">Excluir</button>
         </form>
-        <a href="{% url 'list' %}" class="btn btn-secondary">Voltar</a>
+        <a href="{% url 'list' %}" class="btn-secondary">Voltar</a>
     </div>
 </div>
 {% endblock %}

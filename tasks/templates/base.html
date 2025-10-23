@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +10,13 @@
 <body>
 <header class="header">
     <h1><a href="{% url 'list' %}" class="title">Sistema de tarefas</a></h1>
-    <nav class="navigation">
+    <nav class="nav">
         {% if user.is_authenticated %}
             <span class="username">Bem-vindo, {{ user.username }}!</span>
             <a href="{% url 'logout' %}" class="btn1">Logout</a>
         {% else %}
-            <a href="{% url 'login' %}" class="btn">Login</a>
-            <a href="{% url 'register' %}" class="btn">Registrar</a>
+            <a href="{% url 'login' %}" class="btn1">Login</a>
+            <a href="{% url 'register' %}" class="btn1">Registrar</a>
         {% endif %}
     </nav>
 </header>
@@ -24,7 +24,7 @@
     {% block content %}{% endblock content %}
 </main>
 <footer class="footer">
-    <p>Sistema de tarefas © 2025</p>
+    <p>Sistema de tarefas 2025</p>
 </footer>
 </body>
 </html>

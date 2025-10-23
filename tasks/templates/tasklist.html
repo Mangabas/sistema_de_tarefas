@@ -2,23 +2,37 @@
 {% block content %}
 <div class="page-header">
     <h1>Minhas Tarefas</h1>
+    <form action="{% url 'search_tasks' %}" method="GET">
+        <input type="text" name="search" placeholder="Buscar tarefa" class="form-search">
+        <input type="submit" value="Buscar" class="btn-primary">
+    </form>
     <a href="{% url 'create_task' %}" class="btn-primary">+ Nova Tarefa</a>
 </div>
 
-<div class="task-list">
-    {% for task in tasks %}
-        <div class="card">
-            <a href="{% url 'task_detail' task.id %}" class="card-link">
-                <h2 class="card-title">{{ task.title }}</h2>
-                <p class="card-description">{{ task.description }}</p>
-                <form class="btn-status" action="{% url 'toggle_task' task.id %}"  method="POST">
-                {% csrf_token %}
-                <button class="btn-status" type="submit" >{% if task.completed %}Concluída{% else %}Pendente{% endif %}</button>
-                </form>
-            </a>
-        </div>
-    {% empty %}
-        <p class="empty-message">Nenhuma tarefa disponível. Crie sua primeira tarefa!</p>
-    {% endfor %}
+{% for task in tasks %}
+    <div class="card">
+        <a href="{% url 'task_detail' task.id %}" class="card-link">
+            <h2 class="card-title">{{ task.title }}</h2>
+            <p class="card-description">{{ task.description }}</p>
+        </a>
+        <form action="{% url 'toggle_task' task.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn-status">{% if task.completed %}Concluída{% else %}Pendente{% endif %}</button>
+        </form>
+    </div>
+{% empty %}
+    <p class="empty-message">Nenhuma tarefa disponível. Crie sua primeira tarefa!</p>
+{% endfor %}
+
+<div class="pagination">
+    <span>
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn-primary">anterior</a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn-primary">próxima</a>
+        {% endif %}
+    </span>
 </div>
 {% endblock %}

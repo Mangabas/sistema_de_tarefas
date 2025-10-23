@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic import (
     ListView, 
     DetailView, 
@@ -12,6 +13,12 @@ from django.views.generic import (
     DeleteView
 )
 from .models import Task
+
+def search_tasks(request):
+    if request.method == 'GET':
+        search = request.GET.get('search')
+        tasks = Task.objects.filter(user=request.user, title__icontains=search).order_by('-completed', 'created_at')
+        return render(request, 'tasklist.html', {'tasks': tasks})
 
 
 def register(request):
@@ -51,14 +58,13 @@ def logout(request):
     auth_logout(request)  
     return redirect('list')
 
-def toggle(request,pk):
-
+@login_required
+def toggle(request, pk):
     if request.method == 'POST':
         task = Task.objects.filter(user=request.user, pk=pk).first()
         if task:
             task.completed = not task.completed
             task.save()
-            return redirect('list')
     return redirect('list')
 
 class TaskList(LoginRequiredMixin, ListView):
@@ -69,6 +75,8 @@ class TaskList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user).order_by('-completed', 'created_at')
+        
+        
 
 class DetailTask(LoginRequiredMixin, DetailView):
     model = Task

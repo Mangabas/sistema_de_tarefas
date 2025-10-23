@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="task-list">
+    {% for task in tasks %}
+        <div class="card">
+            <a href="{% url 'task_detail' task.id %}" class="card-link">
+                <h2 class="card-title">{{ task.title }}</h2>
+                <p class="card-description">{{ task.description }}</p>
+            </a>
+            <form class="btn-status" action="{% url 'toggle_task' task.id %}" method="POST">
+                {% csrf_token %}
+                <button class="btn-status" type="submit">{% if task.completed %}Concluída{% else %}Pendente{% endif %}</button>
+            </form>
+        </div>
+    {% empty %}
+        <p class="empty-message">Nenhuma tarefa disponível. Crie sua primeira tarefa!</p>
+    {% endfor %}
+
+    <div class="pagination">
+    <span>
+        {% if page_obj.has_previous %}
+            <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}">anterior</a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">próxima</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% endblock %}

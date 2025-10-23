@@ -1,19 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:wght@400;600&display=swap');
 
 :root {
-  --primary-color: #6e9ede;
+  --primary-color: #bda47c;
   --secondary-color: #2e2e2e;
   --tertiary-color: #000000;
+  --hover-color: #4b4b4b;
   --font-family: 'Montserrat', sans-serif;
 }
 
 * {
     margin: 0;
     padding: 0;
-}
-
-html {
-    height: 1000px;
 }
 
 body {
@@ -36,31 +33,34 @@ body {
     text-decoration: none;
 }
 
-.navigation {
+.nav {
     display: flex;
     align-items: center;
 }
 
-.navigation a,
+.nav a,
 .btn1,
 .username {
-    font-family: var(--font-family);
     color: white;
     margin-left: 15px;
     text-decoration: none;
 }
 
 .content {
-    width: 800px;
-    margin: 30px auto;
+    max-width: 800px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 0 20px;
 }
 
 .page-header {
-    color: #2e2e2e;
+    color: var(--secondary-color);
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .page-header h1 {
@@ -68,65 +68,69 @@ body {
     color: var(--tertiary-color);
 }
 
-.btn1,
-.btn-primary,
-.btn-secondary,
-.btn-danger,
-button {
-    padding: 10px 6px;
-    text-decoration: none;
+.form-search {
+    padding: 10px 20px;
     border: none;
-    cursor: pointer;;
-    display: inline-block;
-    font-family: var(--font-family);
-    font-size: 14px;
-    width: 150px;
-    text-align: center;
-    vertical-align: middle;
-    
-}
-.btn1:hover,
-.btn-primary:hover,
-.btn-secondary:hover,
-.btn-danger:hover,
-button:hover {
-    background-color: rgb(75, 75, 75);
-
-}
-
-.btn-status {
-    color: white;
-    background-color: var(--tertiary-color);
-    padding: 5px 10px;
-    display: inline-block;
-}
-.btn-status:hover {
-    background-color: rgb(75, 75, 75);
-}
-
-.btn-primary {
-    background-color: var(--tertiary-color);
-    color: white;
-}
-
-.btn-secondary {
     background-color: var(--secondary-color);
     color: white;
 }
 
+.form-search::placeholder {
+    color: white;
+}
+
+.btn1,
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-status {
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+}
+
+.btn1:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-danger:hover,
+.btn-status:hover {
+    background-color: var(--hover-color);
+}
+
+.btn-status {
+    padding: 5px 10px;
+    background-color: var(--tertiary-color);
+}
+
+.btn-primary {
+    background-color: var(--tertiary-color);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+}
+
 .btn-danger {
     background-color: #dc3545;
-    color: white;
 }
 
 .card {
     background-color: var(--secondary-color);
     padding: 20px;
     margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .card-link {
     text-decoration: none;
+    flex: 1;
 }
 
 .card-title {
@@ -152,15 +156,17 @@ button:hover {
 }
 
 .form-container {
-    width: 500px;
+    max-width: 500px;
+    width: 100%;
     margin: 0 auto;
 }
 
 .form-field {
-    width: 460px;
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid white;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
 .form-actions {
@@ -178,7 +184,7 @@ button:hover {
 .detail-header {
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #ddd;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -205,4 +211,13 @@ button:hover {
     bottom: 0;
     width: 100%;
     margin: 0;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    margin: 0 5px;
 }
