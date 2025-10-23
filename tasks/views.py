@@ -51,13 +51,24 @@ def logout(request):
     auth_logout(request)  
     return redirect('list')
 
+def toggle(request,pk):
+
+    if request.method == 'POST':
+        task = Task.objects.filter(user=request.user, pk=pk).first()
+        if task:
+            task.completed = not task.completed
+            task.save()
+            return redirect('list')
+    return redirect('list')
+
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = 'tasks'
     template_name = 'tasklist.html'
+    paginate_by = 5
 
     def get_queryset(self):
-        return Task.objects.filter(user=self.request.user)
+        return Task.objects.filter(user=self.request.user).order_by('-completed', 'created_at')
 
 class DetailTask(LoginRequiredMixin, DetailView):
     model = Task

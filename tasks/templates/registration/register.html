@@ -6,19 +6,16 @@
         {% extends "base.html" %}
         {% block content %}
         <h1>Register</h1>
-        <form action="{% url 'register' %}" method="POST">
+        <form class="form-container" action="{% url 'register' %}" method="POST">
             {% csrf_token %}
-            <input type="text" placeholder="Username" name="username">
-            <br>
-            <br>
-            <input type="email" placeholder="Email" name="email">
-            <br>
-            <br>
-            <input type="password" placeholder="Password" name="password">
-            <br>
-            <br>
-            <input type="submit" value="Register">
-            <br>
+            <input class="form-field" type="text" placeholder="Username" name="username">
+
+            <input class="form-field" type="email" placeholder="Email" name="email">
+
+            <input class="form-field" type="password" placeholder="Password" name="password">
+
+            <input class="btn-primary" type="submit" value="Register">
+
         </form>
         {% endblock %}
     </body>

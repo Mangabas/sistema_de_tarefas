@@ -1,23 +1,24 @@
-<html>
-<body>
-    {% extends "base.html" %}
-    {% block content %}
-    <p>Bem-vindo a sua lista de tarefas! Aqui você pode gerenciar suas tarefas.</p>
-    
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <h1>Minhas Tarefas</h1>
+    <a href="{% url 'create_task' %}" class="btn-primary">+ Nova Tarefa</a>
+</div>
 
-<ul>
-    <h1>Tarefas</h1>
-        <ul>
-            {% for task in tasks %}
-                <li><a href="{% url 'task_detail' task.id %}"><h2>{{ task.title }}</h2></a>
-                    <h3>{{ task.description }}</h3>
-                    <h3>{{ task.completed }}</h3></li>
-            {% empty %}
-                <li>Nenhuma tarefa disponível.</li>
-            {% endfor %}
-        </ul>
-</ul>
-<a href="{% url 'create_task' %}">Criar nova tarefa</a>
+<div class="task-list">
+    {% for task in tasks %}
+        <div class="card">
+            <a href="{% url 'task_detail' task.id %}" class="card-link">
+                <h2 class="card-title">{{ task.title }}</h2>
+                <p class="card-description">{{ task.description }}</p>
+                <form class="btn-status" action="{% url 'toggle_task' task.id %}"  method="POST">
+                {% csrf_token %}
+                <button class="btn-status" type="submit" >{% if task.completed %}Concluída{% else %}Pendente{% endif %}</button>
+                </form>
+            </a>
+        </div>
+    {% empty %}
+        <p class="empty-message">Nenhuma tarefa disponível. Crie sua primeira tarefa!</p>
+    {% endfor %}
+</div>
 {% endblock %}
-</body>
-</html>

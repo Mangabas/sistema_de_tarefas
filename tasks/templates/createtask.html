@@ -1,14 +1,15 @@
-<html>
-<form action="{% url 'create_task' %}" method="POST">
-            {% csrf_token %}
-            <input type="text" placeholder="Título" name="title">
-            <br>
-            <br>
-            <input type="text" placeholder="Descrição" name="description">
-            <br>
-            <br>
-            <input type="submit" value="Criar Tarefa">
-            <br>
-        </form>
-        <a href="{% url 'list' %}">Cancelar</a>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<div class="form-container">
+    <h1>Nova Tarefa</h1>
+    <form action="{% url 'create_task' %}" method="POST" class="form">
+        {% csrf_token %}
+        <input type="text" placeholder="Título" name="title" class="form-field" required>
+        <textarea placeholder="Descrição" name="description" class="form-field" rows="4"></textarea>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Criar Tarefa</button>
+            <a href="{% url 'list' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
