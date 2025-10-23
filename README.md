@@ -27,7 +27,6 @@ Este é um sistema web de gerenciamento de tarefas que permite aos usuários:
 ```
 sistema_tarefas/
 ├── manage.py
-├── db.sqlite3
 ├── sistema_tarefas/          # Configurações do projeto
 │   ├── settings.py          # Configurações principais
 │   ├── urls.py              # URLs principais
