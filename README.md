@@ -32,7 +32,7 @@ sistema_tarefas/
     ├── templates/           # Templates HTML
     │   └── registration/    # Login e Registro
     ├── static/
-    │   └── css/
+    │   └── css/             # Estilização de Templates
     └── migrations/          # Migrações do banco
 ```
 
