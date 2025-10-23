@@ -74,18 +74,13 @@ Execute as migrações para criar as tabelas:
 python manage.py migrate
 ```
 
-### 5. Criar um Superusuário (Administrador)
+### 4. Criar um Superusuário (Administrador)
 
 ```bash
 python manage.py createsuperuser
 ```
 
-Siga as instruções no terminal para definir:
-- Nome de usuário
-- E-mail (opcional)
-- Senha
-
-### 6. Rodar o Servidor de Desenvolvimento
+### 5. Rodar o Servidor de Desenvolvimento
 
 ```bash
 python manage.py runserver
