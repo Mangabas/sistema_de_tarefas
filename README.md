@@ -1,8 +1,8 @@
-# Sistema de Tarefas 📝
+# Sistema de Tarefas 
 
 Sistema completo de gerenciamento de tarefas (To-Do List) desenvolvido com Django, permitindo criar, editar, visualizar e excluir tarefas com controle de usuários.
 
-## 📋 Sobre o Projeto
+##  Sobre o Projeto
 
 Este é um sistema web de gerenciamento de tarefas que permite aos usuários:
 - Criar suas próprias tarefas com título e descrição
@@ -14,7 +14,7 @@ Este é um sistema web de gerenciamento de tarefas que permite aos usuários:
 - Paginação automática (5 tarefas por página)
 - Interface responsiva e amigável
 
-## 🚀 Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - **Django 5.2.7** - Framework web Python
 - **PostgreSQL** - Banco de dados (configurado via variáveis de ambiente)
@@ -22,7 +22,7 @@ Este é um sistema web de gerenciamento de tarefas que permite aos usuários:
 - **HTML/CSS** - Interface do usuário
 - **Class-Based Views** - Para operações CRUD
 
-## 📁 Estrutura do Projeto
+##  Estrutura do Projeto
 
 ```
 sistema_tarefas/
@@ -36,7 +36,7 @@ sistema_tarefas/
     └── migrations/          # Migrações do banco
 ```
 
-## ⚙️ Pré-requisitos
+##  Pré-requisitos
 
 - **Python 3.8+** instalado
 - **PostgreSQL** instalado e rodando (ou SQLite para testes)
@@ -44,54 +44,29 @@ sistema_tarefas/
 
 ## 🔧 Configuração e Instalação
 
-### 1. Clone o Repositório
-
-```bash
-git clone <url-do-repositorio>
-cd sistema_tarefas
-```
-
-### 2. Instalar Dependências
+### 1. Instalar Dependências
 
 ```bash
 pip install django
 pip install python-decouple
+pip install psycopg2
 pip install psycopg2-binary
 ```
 
-Ou crie um arquivo `requirements.txt`:
-
-```txt
-Django==5.2.7
-python-decouple==3.8
-psycopg2-binary==2.9.9
-```
-
-E instale com:
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Configurar Variáveis de Ambiente
+### 2. Configurar Variáveis de Ambiente
 
 Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
 
 ```env
-SECRET_KEY=sua-chave-secreta-aqui
-DB_NAME=nome_do_banco
-DB_USER=usuario_do_banco
-DB_PASSWORD=senha_do_banco
-DB_HOST=localhost
-DB_PORT=5432
+SECRET_KEY=
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
 ```
 
-> **Nota:** Para gerar uma SECRET_KEY, você pode usar:
-> ```python
-> python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
-> ```
-
-### 4. Criar o Banco de Dados
+### 3. Criar o Banco de Dados
 
 Execute as migrações para criar as tabelas:
 
@@ -118,17 +93,15 @@ python manage.py runserver
 
 O sistema estará disponível em: **http://127.0.0.1:8000/**
 
-## 👤 Credenciais de Teste
+##  Credenciais de Teste
 
 Após criar o superusuário, você pode usar essas credenciais para acessar o sistema.
 
 **Exemplo de superusuário:**
 - **Usuário:** `admin`
-- **Senha:** `admin123`
+- **Senha:** `admin`
 
-> **Importante:** Crie o superusuário usando o comando `createsuperuser` antes de tentar fazer login.
-
-## 📌 Funcionalidades Detalhadas
+##  Funcionalidades Detalhadas
 
 ### Autenticação de Usuários
 - **Registro:** Novos usuários podem se cadastrar em `/register/`
@@ -166,18 +139,7 @@ class Task(models.Model):
 - **Paginação:** 5 tarefas por página para melhor performance
 - **Validação:** Título único por usuário
 
-## 🔐 Painel Administrativo
-
-Acesse o painel administrativo do Django em: **http://127.0.0.1:8000/admin/**
-
-Use as credenciais do superusuário que você criou.
-
-No admin, você pode:
-- Gerenciar todos os usuários
-- Visualizar e editar todas as tarefas
-- Acessar logs e permissões do sistema
-
-## 🎨 Interface
+##  Interface
 
 O sistema possui uma interface limpa e responsiva com:
 - Header com navegação e informações do usuário
