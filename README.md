@@ -27,27 +27,12 @@ Este é um sistema web de gerenciamento de tarefas que permite aos usuários:
 ```
 sistema_tarefas/
 ├── manage.py
-├── sistema_tarefas/          # Configurações do projeto
-│   ├── settings.py          # Configurações principais
-│   ├── urls.py              # URLs principais
-│   └── wsgi.py
+├── sistema_tarefas/         # Configurações do projeto
 └── tasks/                   # Aplicação de tarefas
-    ├── models.py            # Modelo Task com timestamps
-    ├── views.py             # Views para CRUD e autenticação
-    ├── urls.py              # Rotas da aplicação
-    ├── admin.py             # Configuração do admin
     ├── templates/           # Templates HTML
-    │   ├── base.html        # Template base
-    │   ├── tasklist.html    # Lista de tarefas
-    │   ├── detailtask.html  # Detalhes da tarefa
-    │   ├── createtask.html  # Criar tarefa
-    │   ├── updatetask.html  # Editar tarefa
-    │   └── registration/
-    │       ├── login.html   # Página de login
-    │       └── register.html # Página de registro
+    │   └── registration/    # Login e Registro
     ├── static/
     │   └── css/
-    │       └── tasks.css    # Estilos customizados
     └── migrations/          # Migrações do banco
 ```
 
