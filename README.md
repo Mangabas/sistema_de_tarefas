@@ -109,27 +109,41 @@ Após criar o superusuário, você pode usar essas credenciais para acessar o si
 - **Logout:** Sair do sistema em `/logout/`
 - **Proteção:** Todas as páginas de tarefas exigem autenticação
 
-### Gerenciamento de Tarefas
-
-| Funcionalidade | URL | Método | Descrição |
-|---------------|-----|--------|-----------|
-| Listar tarefas | `/` | GET | Lista todas as tarefas do usuário logado |
-| Criar tarefa | `/task/create/` | GET/POST | Formulário para criar nova tarefa |
-| Detalhes | `/task/<id>/` | GET | Visualiza detalhes de uma tarefa |
-| Editar | `/task/<id>/update/` | GET/POST | Edita uma tarefa existente |
-| Excluir | `/task/<id>/delete/` | POST | Remove uma tarefa |
-| Alternar status | `/task/<id>/toggle/` | POST | Marca como concluída/pendente |
-
-### Modelo de Dados (Task)
+### Gerenciamento de Urls
 
 ```python
-class Task(models.Model):
-    title = CharField          # Título da tarefa (único, máx. 200 caracteres)
-    description = TextField    # Descrição detalhada (opcional)
-    completed = BooleanField   # Status: concluída ou pendente
-    user = ForeignKey          # Usuário proprietário da tarefa
-    created_at = DateTimeField # Data/hora de criação (automático)
-    updated_at = DateTimeField # Data/hora da última atualização (automático)
+urlpatterns = [
+    path('register/', views.register, name='register'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('', views.TaskList.as_view(), name='list'),
+    path('task/<int:pk>/', views.DetailTask.as_view(), name='task_detail'),
+    path('task/create/', views.CreateTask.as_view(), name='create_task'),
+    path('task/<int:pk>/update/', views.UpdateTask.as_view(), name='update_task'),
+    path('task/<int:pk>/delete/', views.DeleteTask.as_view(), name='delete_task'),
+    path('task/<int:pk>/toggle/', views.toggle, name='toggle_task'),
+
+]
+```
+
+### Modelagem (Task)
+
+```python
+class TimeStampModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+class Task(TimeStampModel):
+    title = models.CharField(max_length=200, unique=True)
+    description = models.TextField(blank=True, null=True)
+    completed = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
 ```
 
 ### Recursos Especiais
