@@ -6,12 +6,13 @@ Sistema completo de gerenciamento de tarefas (To-Do List) desenvolvido com Djang
 
 Este é um sistema web de gerenciamento de tarefas que permite aos usuários:
 - Criar suas próprias tarefas com título e descrição
+- Buscar tarefas por título 
 - Marcar tarefas como concluídas ou pendentes
 - Editar e excluir tarefas existentes
 - Visualizar detalhes completos de cada tarefa
 - Sistema de autenticação com registro e login de usuários
 - Cada usuário visualiza apenas suas próprias tarefas
-- Paginação automática (5 tarefas por página)
+- Paginação (5 tarefas por página)
 - Interface responsiva e amigável
 
 ##  Tecnologias Utilizadas
@@ -117,6 +118,7 @@ urlpatterns = [
     path('task/<int:pk>/update/', views.UpdateTask.as_view(), name='update_task'),
     path('task/<int:pk>/delete/', views.DeleteTask.as_view(), name='delete_task'),
     path('task/<int:pk>/toggle/', views.toggle, name='toggle_task'),
+    path('search/', views.search_tasks, name='search_tasks'),
 
 ]
 ```
@@ -147,12 +149,13 @@ class Task(TimeStampModel):
 - **Timestamps automáticos:** created_at e updated_at gerenciados automaticamente
 - **Paginação:** 5 tarefas por página para melhor performance
 - **Validação:** Título único por usuário
+- - **Busca:** Busca por título de tarefa
 
 ##  Interface
 
 O sistema possui uma interface limpa e responsiva com:
 - Header com navegação e informações do usuário
-- Botões de ação para criar, editar e excluir tarefas
+- Botões de ação para criar, buscar, editar e excluir tarefas
 - Cards visuais para cada tarefa
 - Indicadores de status (Concluída/Pendente)
 - Footer com informações do sistema
