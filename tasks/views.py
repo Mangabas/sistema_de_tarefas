@@ -37,7 +37,7 @@ def register(request):
         user = User.objects.create_user(username=username, email=email, password=password)
         user.save()
 
-        return HttpResponse(f"Usuario {username} criado com sucesso!")
+        return redirect('list')
 
 def login(request):
     if request.method == 'GET':
